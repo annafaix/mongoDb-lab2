@@ -4,12 +4,12 @@ const { generateListWithDocs } = require('./randomDocs.js');
 const MongoClient = require('mongodb').MongoClient;
 
 const url = 'mongodb://127.0.0.1:27017';    // connection URL
-const options = { useNewUrlParser: true};   // fixed error, no idea how
+const options = { useNewUrlParser: true};   // fixed error
 const dbName = 'shoesdb';                   // database name
 
 const insertDocuments = (db, callback) => {
   const collection = db.collection('shoes');      // get the documents collection
-  let numDocs = 1000;
+  let numDocs = 10;
   let data = generateListWithDocs(numDocs);       // generate random documents x numDocs
 
   // insert documents

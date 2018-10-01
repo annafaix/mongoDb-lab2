@@ -2,7 +2,7 @@
 const MongoClient = require('mongodb').MongoClient;
 
 const url = 'mongodb://127.0.0.1:27017';    // connection URL
-const options = { useNewUrlParser: true};   // fixed error, no idea how
+const options = { useNewUrlParser: true};   // fixed error
 const dbName = 'shoesdb';                   // database name
 
 const removeDocument = (db, callback) => {
