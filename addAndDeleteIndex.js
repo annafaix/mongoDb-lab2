@@ -5,7 +5,7 @@ const options = { useNewUrlParser: true};   // fixed error
 const dbName = 'shoesdb';
 
 
-const addIndex = (db, callback) => {
+const addIndexNamePrice = (db, callback) => {
   const collection = db.collection('shoes');
   collection.createIndex( {"name": 1, "price": -1 }, (err, result) => {
   if(err) throw err;
@@ -14,6 +14,14 @@ const addIndex = (db, callback) => {
   });
 }
 
+const addIndexText = (db, callback) => {
+  const collection = db.collection('shoes');
+  collection.createIndex( { "category": "text" }, (err, result) => {
+  if(err) throw err;
+  console.log(result);
+  callback(result);
+  });
+}
 const deleteIndex = (db, callback) => {
   const collection = db.collection('shoes');
   collection.dropIndex( {"name": 1, "price": -1 }, (err, result) => {
@@ -32,7 +40,7 @@ MongoClient.connect(url, options, (err, client) => {
   console.log('Connected succsessfully to server');
   const db = client.db(dbName);             // uppkoppling till db
 
-  addIndex(db, function(){
+  addIndexNamePrice(db, function(){
     client.close();
   })
 })
