@@ -16,7 +16,7 @@ const addIndexNamePrice = (db, callback) => {
 
 const addIndexText = (db, callback) => {
   const collection = db.collection('shoes');
-  collection.createIndex( { "category": "text" }, (err, result) => {
+  collection.createIndex( { "category": "text", "name": 1 }, (err, result) => {
   if(err) throw err;
   console.log(result);
   callback(result);
@@ -24,7 +24,7 @@ const addIndexText = (db, callback) => {
 }
 const deleteIndex = (db, callback) => {
   const collection = db.collection('shoes');
-  collection.dropIndex( {"name": 1, "price": -1 }, (err, result) => {
+  collection.dropIndex( "category_text", (err, result) => {
   if(err) throw err;
   console.log(result);
   callback(result);
@@ -40,7 +40,7 @@ MongoClient.connect(url, options, (err, client) => {
   console.log('Connected succsessfully to server');
   const db = client.db(dbName);             // uppkoppling till db
 
-  addIndexNamePrice(db, function(){
+  addIndexText(db, function(){
     client.close();
   })
 })
